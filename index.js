@@ -39,9 +39,39 @@ Airplane.prototype.land = function () {
         + It should return a string with `name` and `age`. Example: "Mary, 50"
 */
 
-function Person() {
-  
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+  this.stomach = [];
 }
+
+Person.prototype.eat = function(edible){
+  if(this.stomach.length < 10){
+    this.stomach.push(edible);
+  }
+}
+
+Person.prototype.poop = function(){
+  this.stomach = [];
+}
+
+Person.prototype.toString = function(){
+  return `${this.name}, ${this.age}`;
+}
+
+const kevin = new Person('Kevin', 26);
+const leo = new Person('Leo', 18);
+
+kevin.eat('🌮');
+kevin.eat('🥪');
+kevin.eat('🥞');
+kevin.eat('🌭');
+// 🍕🍔🍟🌭🥞🥪🌮
+
+console.log(kevin.stomach);
+kevin.poop();
+
+ console.log(kevin.stomach);
 
 
 
@@ -63,9 +93,18 @@ function Person() {
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
 
-function Car() {
-  
+function Car(model, milesPerGallon) {
+  this.model = model;
+  this.milesPerGallon = milesPerGallon;
 }
+Car.prototype.fill = function(gallons){
+  // const tank = 
+}
+Car.prototype.drive = function(distance){
+  // const distance = 
+
+}
+const gWagon = new Car('G Wagon', 18);
 
 
 /*
@@ -75,18 +114,26 @@ function Car() {
     - Besides the methods on Person.prototype, babies have the ability to `.play()`:
         + Should return a string "Playing with x", x being the favorite toy.
 */
-function Baby() {
- 
+function Baby(name, age, favoriteToy) {
+  Person.call(this, name, age);
+  this.favoriteToy = favoriteToy;
 }
 
 
+Baby.prototype = Object.create(Person.prototype);
+Baby.prototype.play = function(){
+  return `Playing with ${this.favoriteToy}`;
+}
+
+const layla = new Baby('Layla', 2, 'blocks');
+console.log('Task 3', layla.play());
 /* 
   TASK 4
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1. window binding - this refers to the window and will return the windor (error)
+  2. Implicit binding - this refers to the element to the left of the dot when a function is invoked.
+  3. Explicit. 'This' will explicity refer to an object/function/etc.
+  4. New binding. This creates an object to be used with this.
 */
 
 
