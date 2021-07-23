@@ -70,8 +70,7 @@ kevin.eat('🌭');
 
 console.log(kevin.stomach);
 kevin.poop();
-
- console.log(kevin.stomach);
+console.log(kevin.stomach);
 
 
 
@@ -96,16 +95,23 @@ kevin.poop();
 function Car(model, milesPerGallon) {
   this.model = model;
   this.milesPerGallon = milesPerGallon;
+  this.tank = 0;
+  this.odometer = 0;
 }
-Car.prototype.fill = function(gallons){
-  // const tank = 
+Car.prototype.fill = function(gallons) {
+  this.tank = this.tank + gallons;
 }
-Car.prototype.drive = function(distance){
-  // const distance = 
-
+Car.prototype.drive = function(distance) {
+  const ableMiles = this.tank * this.milesPerGallon;
+  if(distance <= ableMiles){
+    this.odometer = this.odometer + distance;
+    this.tank = this.tank - (distance / this.milesPerGallon);
+  }else{
+    this.odometer = this.odometer + distance;
+    this.tank = 0;
+    return `I ran out of fuel at ${this.odometer}`;
+  }
 }
-const gWagon = new Car('G Wagon', 18);
-
 
 /*
   TASK 3
